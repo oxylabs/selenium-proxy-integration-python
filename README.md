@@ -29,7 +29,7 @@ COUNTRY = "US"
 To do that, adjust the `country` variable to any country that Oxylabs support. You can check out our [documentation](https://developers.oxylabs.io/residential-proxies/#country-specific-entry-nodes) for a complete list of country-specific entry nodes.
 
 ## Testing Proxy Connection
-You can test proxy connection by visiting https://ip.oxylabs.io/. It will return your current IP address.
+You can test proxy connection by visiting https://ip.oxylabs.io/. If everything is working correctly, it will return the IP address of a current proxy.
 ```python
 try:
     driver.get("https://ip.oxylabs.io/")
