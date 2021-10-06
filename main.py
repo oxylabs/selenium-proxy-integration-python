@@ -21,4 +21,4 @@ try:
     driver.get("https://ip.oxylabs.io/")
     time.sleep(5)
 finally:
-    driver.close()
+    driver.quit()
