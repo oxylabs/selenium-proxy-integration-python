@@ -36,7 +36,7 @@ try:
     driver.get("https://ip.oxylabs.io/")
     time.sleep(5)
 finally:
-    driver.close()
+    driver.quit()
 ```
 
 ## Full Code
@@ -62,7 +62,7 @@ try:
     driver.get("https://ip.oxylabs.io/")
     time.sleep(5)
 finally:
-    driver.close()
+    driver.quit()
 ```
 If you're having any trouble integrating proxies with Selenium and this guide didn't help you - feel free to contact Oxylabs customer support at support@oxylabs.io.
 
