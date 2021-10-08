@@ -30,7 +30,7 @@ To do that, adjust the `country` variable to any country that Oxylabs support.
 You can check out our [documentation](https://developers.oxylabs.io/residential-proxies/#country-specific-entry-nodes) for a complete list of country-specific entry nodes.
 
 ## Testing Proxy Connection
-To see if the proxy is working, try visiting https://ip.oxylabs.io. <br>If everything is working correctly, it will return an IP address of a proxy that you're using.
+To see if the proxy is working, try visiting [ip.oxylabs.io](https://ip.oxylabs.io) <br>If everything is working correctly, it will return an IP address of a proxy that you're using.
 ```python
 try:
     driver.get("https://ip.oxylabs.io/")
