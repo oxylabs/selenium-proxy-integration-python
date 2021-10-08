@@ -20,7 +20,7 @@ PASSWORD = "your_password"
 HOST = "pr.oxylabs.io"
 PORT = 7777
 ```
-Adjust the `your_username` and `your_password` fields with the username and password of your Oxylabs account.
+Adjust the `your_username` and `your_password` values with the username and password of your Oxylabs account.
 ## Country-Specific Entry Node
 If you want, you can also specify the entry node of a specific country:
 ```python
@@ -65,5 +65,3 @@ finally:
     driver.quit()
 ```
 If you're having any trouble integrating proxies with Selenium and this guide didn't help you - feel free to contact Oxylabs customer support at support@oxylabs.io.
-
-
