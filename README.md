@@ -15,7 +15,7 @@ Another required package is `webdriver-manager`. It's a package that simplifies 
 so you don't need to manually download a new version of a web driver after each update. Visit the [official project directory](https://pypi.org/project/webdriver-manager/) 
 on pypi to find out more information. 
 
-You can install the following using `pip` as well.
+You can install the following using `pip` as well:
 ```bash
 pip install webdriver-manager
 ```
