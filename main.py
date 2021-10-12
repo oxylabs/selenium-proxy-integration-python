@@ -11,7 +11,7 @@ PASSWORD = "your_password"
 ENDPOINT = "pr.oxylabs.io:7777"
 
 
-def chrome_proxy(user: str, password: str, endpoint: str):
+def chrome_proxy(user: str, password: str, endpoint: str) -> dict:
     wire_options = {
         "proxy": {
             "http": f"http://{user}:{password}@{endpoint}",
