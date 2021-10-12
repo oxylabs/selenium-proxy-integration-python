@@ -18,7 +18,8 @@ pip install selenium-wire
 Another required package is `webdriver-manager`. It's a package
 that simplifies the management of binary drivers for different
 browsers, so you don't need to manually download a new version
-of a web driver after each update. Visit the [official project directory](https://pypi.org/project/webdriver-manager/) 
+of a web driver after each update. 
+Visit the [official project directory](https://pypi.org/project/webdriver-manager/) 
 on pypi to find out more information. 
 
 You can install the following using `pip` as well:
