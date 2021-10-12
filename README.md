@@ -4,37 +4,49 @@
 
 ## Requirements
 
-For the integration to work, you'll need to install [Selenium Wire](https://github.com/wkeeling/selenium-wire) to extend Selenium’s 
-Python bindings as implementing proxies that require authentication using default Selenium module complicates the process too much.
+For the integration to work, you'll need to install
+[Selenium Wire](https://github.com/wkeeling/selenium-wire) 
+to extend Selenium’s Python bindings as implementing proxies
+that require authentication using default Selenium module 
+complicates the process too much.
 
 You can do it using `pip` command:
 ```bash
 pip install selenium-wire
 ```
-Another required package is `webdriver-manager`. It's a package that simplifies the management of binary drivers for different browsers,
-so you don't need to manually download a new version of a web driver after each update. Visit the [official project directory](https://pypi.org/project/webdriver-manager/) 
-on pypi to find out more information. 
+
+Another required package is `webdriver-manager`. It's a package
+that simplifies the management of binary drivers for different
+browsers, so you don't need to manually download a new version
+of a web driver after each update. Visit the [official project directory]
+(https://pypi.org/project/webdriver-manager/) on pypi to find out more information. 
 
 You can install the following using `pip` as well:
 ```bash
 pip install webdriver-manager
 ```
+
 Required version of Python: `Python 3.5` (or higher)
 
 ## Proxy Authentication
 
-For proxies to work, you'll need to specify your account credentials inside the [main.py](https://github.com/oxylabs/selenium-proxy-integration/blob/main/main.py) file.
+For proxies to work, you'll need to specify your account credentials inside 
+the [main.py](https://github.com/oxylabs/selenium-proxy-integration/blob/main/main.py) file.
+
 ```python
 USERNAME = "your_username"
 PASSWORD = "your_password"
 ENDPOINT = "pr.oxylabs.io:7777"
 ```
+
 Adjust the `your_username` and `your_password` value fields with the username and password of 
 your Oxylabs account.
 
 ## Testing Proxy Connection
 
-To see if the proxy is working, try visiting [ip.oxylabs.io](https://ip.oxylabs.io) <br>If everything is working correctly, it will return an IP address of a proxy that you're using.
+To see if the proxy is working, try visiting [ip.oxylabs.io](https://ip.oxylabs.io) 
+If everything is working correctly, it will return an IP address of a proxy that you're using.
+
 ```python
 try:
     driver.get("https://ip.oxylabs.io/")
@@ -85,4 +97,5 @@ def execute_driver():
 if __name__ == "__main__":
     print(execute_driver())
 ```
+
 If you're having any trouble integrating proxies with Selenium and this guide didn't help you - feel free to contact Oxylabs customer support at support@oxylabs.io.
