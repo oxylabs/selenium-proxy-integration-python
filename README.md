@@ -4,13 +4,18 @@
 
 ## Requirements
 
-For the integration to work, you'll need to install Selenium Wire to extend Selenium’s Python bindings as implementing
-proxies that require authentication using default Selenium module complicated the process too much.
-default Selenium module is too much complicated. You can do it using `pip` command:
+For the integration to work, you'll need to install [Selenium Wire](https://github.com/wkeeling/selenium-wire) to extend Selenium’s 
+Python bindings as implementing proxies that require authentication using default Selenium module complicates the process too much.
+
+You can do it using `pip` command:
 ```bash
 pip install selenium-wire
 ```
-Another required package is `webdriver-manager`. It's a package that simplifies the management of binary drivers for different browsers, so you don't need to manually download a new version of a web driver after each update. Visit the [official project directory](https://pypi.org/project/webdriver-manager/) on pypi to find out more information. You can install the following using `pip` as well.
+Another required package is `webdriver-manager`. It's a package that simplifies the management of binary drivers for different browsers,
+so you don't need to manually download a new version of a web driver after each update. Visit the [official project directory](https://pypi.org/project/webdriver-manager/) 
+on pypi to find out more information. 
+
+You can install the following using `pip` as well.
 ```bash
 pip install webdriver-manager
 ```
