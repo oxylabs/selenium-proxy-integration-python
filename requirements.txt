@@ -1,2 +1,2 @@
 webdriver-manager
-selenium
+selenium-wire
