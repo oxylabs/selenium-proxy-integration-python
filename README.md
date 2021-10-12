@@ -15,12 +15,11 @@ You can do it using `pip` command:
 pip install selenium-wire
 ```
 
-Another required package is `webdriver-manager`. It's a package
-that simplifies the management of binary drivers for different
-browsers, so you don't need to manually download a new version
-of a web driver after each update. Visit the 
-[official project directory](https://pypi.org/project/webdriver-manager/) 
-on pypi to find out more information. 
+Another recommended package is `webdriver-manager`. It simplifies the management
+of binary drivers for different browsers, so you don't need to manually download
+a new version of a web driver after each update. Visit the 
+[official project directory](https://pypi.org/project/webdriver-manager/) on pypi to
+find out more information. 
 
 You can install the following using `pip` as well:
 ```bash
@@ -48,14 +47,6 @@ your Oxylabs account.
 To see if the proxy is working, try visiting [ip.oxylabs.io](https://ip.oxylabs.io) 
 If everything is working correctly, it will return an IP address of a proxy that you're using.
 
-```python
-try:
-    driver.get("https://ip.oxylabs.io/")
-    return f'\nYour IP is: {re.search(r"[0-9].{2,}", driver.page_source).group()}'
-finally:
-    driver.quit()
-```
-
 ## Full Code
 ```python
 import re
@@ -70,7 +61,7 @@ PASSWORD = "your_password"
 ENDPOINT = "pr.oxylabs.io:7777"
 
 
-def chrome_proxy(user: str, password: str, endpoint: str):
+def chrome_proxy(user: str, password: str, endpoint: str) -> dict:
     wire_options = {
         "proxy": {
             "http": f"http://{user}:{password}@{endpoint}",
