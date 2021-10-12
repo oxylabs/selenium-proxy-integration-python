@@ -1,24 +1,40 @@
-import time
-from selenium import webdriver
+import re
+from typing import Optional
+
+from seleniumwire import webdriver
+
 # A package to have a chromedriver always up-to-date.
 from webdriver_manager.chrome import ChromeDriverManager
-from proxies import chrome_proxy
 
 USERNAME = "your_username"
 PASSWORD = "your_password"
-HOST = "pr.oxylabs.io"
-PORT = 7777
-# Specify country code if you want proxies from a single country, e.g. `US`.
-# Otherwise - set the variable to `None`.
-COUNTRY = "US"
+ENDPOINT = "pr.oxylabs.io:7777"
 
-options = webdriver.ChromeOptions()
-proxy_ext = chrome_proxy(USERNAME, PASSWORD, HOST, PORT, COUNTRY)
-options.add_extension(proxy_ext)
-driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
-try:
-    driver.get("https://ip.oxylabs.io/")
-    time.sleep(5)
-finally:
-    driver.quit()
+def chrome_proxy(user: str, password: str, endpoint: str):
+    wire_options = {
+        "proxy": {
+            "http": f"http://{user}:{password}@{endpoint}",
+            "https": f"http://{user}:{password}@{endpoint}",
+        }
+    }
+
+    return wire_options
+
+
+def execute_driver():
+    options = webdriver.ChromeOptions()
+    options.headless = True
+    proxies = chrome_proxy(USERNAME, PASSWORD, ENDPOINT)
+    driver = webdriver.Chrome(
+        ChromeDriverManager().install(), options=options, seleniumwire_options=proxies
+    )
+    try:
+        driver.get("https://ip.oxylabs.io/")
+        return f'\nYour IP is: {re.search(r"[0-9].{2,}", driver.page_source).group()}'
+    finally:
+        driver.quit()
+
+
+if __name__ == "__main__":
+    print(execute_driver())

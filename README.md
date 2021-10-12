@@ -1,67 +1,82 @@
 # Oxylabs’ Residential Proxies integration with Selenium
 
-[<img src="https://img.shields.io/static/v1?label=&message=Python&color=brightgreen" />](https://github.com/topics/python) [<img src="https://img.shields.io/static/v1?label=&message=Selenium&color=orange" />](https://github.com/topics/selenium) [<img src="https://img.shields.io/static/v1?label=&message=Web-Scraping&color=yellow" />](https://github.com/topics/web-scraping) [<img src="https://img.shields.io/static/v1?label=&message=Rotating%20Proxies&color=blueviolet" />](https://github.com/topics/rotating-proxies)
+[<img src="https://img.shields.io/static/v1?label=&message=Python&color=brightgreen" />](https://github.com/topics/python) [<img src="https://img.shields.io/static/v1?label=&message=Selenium&color=orange" />](https://github.com/topics/selenium-wire) [<img src="https://img.shields.io/static/v1?label=&message=Web-Scraping&color=yellow" />](https://github.com/topics/web-scraping) [<img src="https://img.shields.io/static/v1?label=&message=Rotating%20Proxies&color=blueviolet" />](https://github.com/topics/rotating-proxies)
 
 ## Requirements
-For the integration to work, you'll need to install Selenium on your system. You can do it using `pip` command:
+For the integration to work, you'll need to install Selenium Wire on your system as
+using proxy implementation with the original version of Selenium on `headless` mode
+doesn't work. You can do it using `pip` command:
 ```bash
-pip install selenium
+pip install selenium-wire
 ```
 Another required package is `webdriver-manager`. It's a package that simplifies the management of binary drivers for different browsers, so you don't need to manually download a new version of a web driver after each update. Visit the [official project directory](https://pypi.org/project/webdriver-manager/) on pypi to find out more information. You can install the following using `pip` as well.
 ```bash
 pip install webdriver-manager
 ```
 Required version of Python: `Python 3.5` (or higher)
+
 ## Proxy Authentication
+
 For proxies to work, you'll need to specify your account credentials inside the [main.py](https://github.com/oxylabs/selenium-proxy-integration/blob/main/main.py) file.
 ```python
 USERNAME = "your_username"
 PASSWORD = "your_password"
-HOST = "pr.oxylabs.io"
-PORT = 7777
+ENDPOINT = "pr.oxylabs.io:7777"
 ```
-Adjust the `your_username` and `your_password` values with the username and password of your Oxylabs account.
-## Country-Specific Entry Node
-If you want, you can also specify the entry node of a specific country:
-```python
-COUNTRY = "US"
-```
-To do that, adjust the `country` variable to any country that Oxylabs support. 
-You can check out our [documentation](https://developers.oxylabs.io/residential-proxies/#country-specific-entry-nodes) for a complete list of country-specific entry nodes.
+Adjust the `your_username` and `your_password` value fields with the username and password of 
+your Oxylabs account.
 
 ## Testing Proxy Connection
+
 To see if the proxy is working, try visiting [ip.oxylabs.io](https://ip.oxylabs.io) <br>If everything is working correctly, it will return an IP address of a proxy that you're using.
 ```python
 try:
     driver.get("https://ip.oxylabs.io/")
-    time.sleep(5)
+    return f'\nYour IP is: {re.search(r"[0-9].{2,}", driver.page_source).group()}'
 finally:
     driver.quit()
 ```
 
 ## Full Code
 ```python
+import re
+from typing import Optional
 
-import time
-from selenium import webdriver
+from seleniumwire import webdriver
+# A package to have a chromedriver always up-to-date.
 from webdriver_manager.chrome import ChromeDriverManager
-from proxies import chrome_proxy
 
 USERNAME = "your_username"
 PASSWORD = "your_password"
-HOST = "pr.oxylabs.io"
-PORT = 7777
-COUNTRY = "US"
+ENDPOINT = "pr.oxylabs.io:7777"
 
-options = webdriver.ChromeOptions()
-proxy_ext = chrome_proxy(USERNAME, PASSWORD, HOST, PORT, COUNTRY)
-options.add_extension(proxy_ext)
-driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
-try:
-    driver.get("https://ip.oxylabs.io/")
-    time.sleep(5)
-finally:
-    driver.quit()
+def chrome_proxy(user: str, password: str, endpoint: str):
+    wire_options = {
+        "proxy": {
+            "http": f"http://{user}:{password}@{endpoint}",
+            "https": f"http://{user}:{password}@{endpoint}",
+        }
+    }
+
+    return wire_options
+
+
+def execute_driver():
+    options = webdriver.ChromeOptions()
+    options.headless = True
+    proxies = chrome_proxy(USERNAME, PASSWORD, ENDPOINT)
+    driver = webdriver.Chrome(
+        ChromeDriverManager().install(), options=options, seleniumwire_options=proxies
+    )
+    try:
+        driver.get("https://ip.oxylabs.io/")
+        return f'\nYour IP is: {re.search(r"[0-9].{2,}", driver.page_source).group()}'
+    finally:
+        driver.quit()
+
+
+if __name__ == "__main__":
+    print(execute_driver())
 ```
 If you're having any trouble integrating proxies with Selenium and this guide didn't help you - feel free to contact Oxylabs customer support at support@oxylabs.io.
