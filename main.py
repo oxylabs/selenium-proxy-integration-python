@@ -31,7 +31,7 @@ def execute_driver():
     )
     try:
         driver.get("https://ip.oxylabs.io/")
-        return f'\nYour IP is: {re.search(r"[0-9].{2,}", driver.page_source).group()}'
+        return f'\nYour IP is: {driver.find_element_by_css_selector("pre").text}'
     finally:
         driver.quit()
 
