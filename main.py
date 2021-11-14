@@ -1,7 +1,6 @@
 import re
 
 from seleniumwire import webdriver
-
 # A package to have a chromedriver always up-to-date.
 from webdriver_manager.chrome import ChromeDriverManager
 
