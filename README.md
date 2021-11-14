@@ -50,7 +50,6 @@ If everything is working correctly, it will return an IP address of a proxy that
 ## Full Code
 ```python
 import re
-from typing import Optional
 
 from seleniumwire import webdriver
 # A package to have a chromedriver always up-to-date.
