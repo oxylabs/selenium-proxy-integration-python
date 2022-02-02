@@ -1,5 +1,4 @@
-import re
-
+from selenium.webdriver.common.by import By
 from seleniumwire import webdriver
 # A package to have a chromedriver always up-to-date.
 from webdriver_manager.chrome import ChromeDriverManager
@@ -29,7 +28,7 @@ def execute_driver():
     )
     try:
         driver.get("https://ip.oxylabs.io/")
-        return f'\nYour IP is: {driver.find_element_by_css_selector("pre").text}'
+        return f'\nYour IP is: {driver.find_element(By.CSS_SELECTOR, "pre").text}'
     finally:
         driver.quit()
 
