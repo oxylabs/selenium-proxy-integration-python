@@ -1,2 +1,2 @@
-webdriver-manager
-selenium-wire
+webdriver-manager>=4.0.1
+selenium-wire>=5.1.0
