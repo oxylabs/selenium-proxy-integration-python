@@ -62,7 +62,7 @@ PASSWORD = "your_password"
 ENDPOINT = "pr.oxylabs.io:7777"
 
 
-def chrome_proxy(user: str, password: str, endpoint: str) -> dict:
+def get_chrome_proxy(user: str, password: str, endpoint: str) -> dict:
     wire_options = {
         "proxy": {
             "http": f"http://{user}:{password}@{endpoint}",
@@ -76,9 +76,13 @@ def chrome_proxy(user: str, password: str, endpoint: str) -> dict:
 def execute_driver():
     options = webdriver.ChromeOptions()
     options.headless = True
-    proxies = chrome_proxy(USERNAME, PASSWORD, ENDPOINT)
+    seleniumwire_options = {
+        **get_chrome_proxy(USERNAME, PASSWORD, ENDPOINT),
+        "driver_path": ChromeDriverManager().install(),
+    }
     driver = webdriver.Chrome(
-        ChromeDriverManager().install(), options=options, seleniumwire_options=proxies
+        options=options,
+        seleniumwire_options=seleniumwire_options,
     )
     try:
         driver.get("https://ip.oxylabs.io/")
