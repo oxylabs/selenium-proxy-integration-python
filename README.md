@@ -47,7 +47,7 @@ your Oxylabs account.
 
 ## Testing Proxy Connection
 
-To see if the proxy is working, try visiting [ip.oxylabs.io](https://ip.oxylabs.io) 
+To see if the proxy is working, try visiting [ip.oxylabs.io/location](https://ip.oxylabs.io/location) 
 If everything is working correctly, it will return an IP address of a proxy that you're using.
 
 ## Full Code
@@ -85,7 +85,7 @@ def execute_driver():
         seleniumwire_options=seleniumwire_options,
     )
     try:
-        driver.get("https://ip.oxylabs.io/")
+        driver.get("https://ip.oxylabs.io/location")
         return f'\nYour IP is: {driver.find_element(By.CSS_SELECTOR, "pre").text}'
     finally:
         driver.quit()
