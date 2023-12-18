@@ -31,7 +31,7 @@ def execute_driver():
         seleniumwire_options=seleniumwire_options,
     )
     try:
-        driver.get("https://ip.oxylabs.io/")
+        driver.get("https://ip.oxylabs.io/location")
         return f'\nYour IP is: {driver.find_element(By.CSS_SELECTOR, "pre").text}'
     finally:
         driver.quit()
